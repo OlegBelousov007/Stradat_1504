@@ -120,7 +120,14 @@ fun Screen2(
         LazyColumn(modifier = Modifier
             .fillMaxWidth()){
             items(itemsList.value){item ->
-                ListItem(item) }
+                ListItem(item, {
+                    mainViewModel.nameEntity = it
+                    mainViewModel.newText.value = it.name.toString()
+                },
+                    {
+                        mainViewModel.deleteItem(item)
+                    }
+                ) }
         }
     }
 }

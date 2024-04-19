@@ -19,13 +19,15 @@ import com.example.stradat_1504.ui.data.NameEntity
 
 @Composable
 fun ListItem (
-    item: NameEntity
+    item: NameEntity,
+    onClick: (NameEntity) -> Unit,
+    onClickDelete: (NameEntity) -> Unit
 ) {
     Card(modifier = Modifier
         .fillMaxWidth()
         .padding(5.dp)
         .clickable {
-
+            onClick(item)
         }
     ) {
         Row(
@@ -33,15 +35,16 @@ fun ListItem (
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                item.name,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .padding(10.dp)
-            )
-            IconButton(onClick = {
-            }) {
+            item.name?.let {
+                Text(
+                    it,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .padding(10.dp)
+                )
+            }
+            IconButton(onClick = { onClickDelete(item) }) {
                 Icon(
                     imageVector = Icons.Default.Delete,
                     contentDescription = "Delete"

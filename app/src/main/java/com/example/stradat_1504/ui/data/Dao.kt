@@ -13,8 +13,10 @@ import kotlinx.coroutines.flow.Flow
 interface Dao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertItem(nameEntity: NameEntity)
+
     @Delete
     suspend fun deleteItem(nameEntity: NameEntity)
+
     @Query("SELECT * FROM contact")
     fun getAllItems(): Flow<List<NameEntity>>
 }
